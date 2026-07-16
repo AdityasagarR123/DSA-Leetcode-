@@ -1,10 +1,10 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
+        int candidate1 = 0, candidate2 = 0;
         int count1 = 0, count2 = 0;
-        int candidate1 = 0, candidate2 = 1; // different initially
-        
-        // Step 1: Find candidates
+
+        // Find candidates
         for (int num : nums) {
             if (num == candidate1) {
                 count1++;
@@ -26,19 +26,24 @@ public:
             }
         }
 
-        // Step 2: Verify
+        // Verify candidates
         count1 = count2 = 0;
+
         for (int num : nums) {
-            if (num == candidate1) count1++;
-            else if (num == candidate2) count2++;
+            if (num == candidate1)
+                count1++;
+            else if (num == candidate2)
+                count2++;
         }
 
-        vector<int> result;
-        int n = nums.size();
+        vector<int> ans;
 
-        if (count1 > n / 3) result.push_back(candidate1);
-        if (count2 > n / 3) result.push_back(candidate2);
+        if (count1 > nums.size() / 3)
+            ans.push_back(candidate1);
 
-        return result;
+        if (count2 > nums.size() / 3)
+            ans.push_back(candidate2);
+
+        return ans;
     }
 };
